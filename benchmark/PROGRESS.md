@@ -24,7 +24,7 @@
 - Branch: `agent/codex`
 - Phase Start Commit: `38b02bc`
 - Candidate HEAD: `79bdcac`
-- Working Tree: DIRTY（仅未跟踪的本地生成物，不进入候选提交）
+- Working Tree: CLEAN（2026-09-20 主控复核）
 - Self Test: REPORTED COMPLETED / 精确运行时长不可用
 - Judge Result: PASSED（94/100，DX 为待用户体验的暂定分）
 - Fix Round: 0/3
@@ -38,7 +38,7 @@
 - Branch: `agent/claude`
 - Phase Start Commit: `38b02bc`
 - Candidate HEAD: `530e86f`
-- Working Tree: DIRTY（仅未跟踪的本地生成物，不进入候选提交）
+- Working Tree: CLEAN（2026-09-20 主控复核）
 - Self Test: REPORTED COMPLETED / 精确运行时长不可用
 - Judge Result: PASSED（94/100，DX 为待用户体验的暂定分）
 - Fix Round: 0/3
@@ -70,14 +70,19 @@
 
 - Task: `benchmark/tasks/phase-02-x/task.md`
 - Common Prompt: `benchmark/prompts/phase-02-x/common.md`
-- Expected Task SHA-256: `657107db576e56e47ecf6a5c7a7269d7a4e773d7`
+- SHA-256 command (macOS): `shasum -a 256 benchmark/tasks/phase-02-x/task.md`
+- Expected Task SHA-256: `3bc5c804eb46f776c271399b828bc9392d3492e9fff44c297ea2251e8de58d83`
 - Codex absolute path: `/Users/xyf/PycharmProjects/video-ai-codex/benchmark/tasks/phase-02-x/task.md`
 - Claude absolute path: `/Users/xyf/PycharmProjects/video-ai-claude/benchmark/tasks/phase-02-x/task.md`
 - Codex phase start commit: `ba2282c`
 - Claude phase start commit: `b5eeb1f`
+- Codex corrected prompt commit: `d25e288`
+- Claude corrected prompt commit: `ccaaf43`
 - Codex task hash: VERIFIED
 - Claude task hash: VERIFIED
-- Distribution incident: Claude 第一次启动时任务文件缺失；属于 Controller 分发失误，不计候选失败、重试或人工干预。
+- Distribution incidents:
+  - Claude 第一次启动时任务文件缺失；属于 Controller 分发失误，不计候选失败、重试或人工干预。
+  - Codex 与 Claude 随后均因主控把 macOS 裸 `shasum` 产生的 SHA-1 误标为 SHA-256 而正确停止；任务正文未漂移，两边实际 SHA-256 一致。本次停止不计候选失败、重试或人工干预。
 
 ## 阶段历史
 

@@ -115,9 +115,9 @@ git -C /Users/xyf/PycharmProjects/video-ai-claude status --short --branch
 5. 检查任务是否满足 `CODEX.md` 的 30–90 分钟独立任务粒度；过大时拆分。
 6. 将唯一公共任务保存为 `benchmark/tasks/phase-XX/task.md`，共用提示词保存为 `benchmark/prompts/phase-XX/common.md`。
 7. 把任务文件实际同步到两个候选 Worktree；不得只存在于主控 Worktree。
-8. 在发送提示词前同时检查两个候选路径存在，并确认任务文件 SHA-256 完全相同。
-9. 共用提示词必须写明两个候选各自的任务文件绝对路径、统一相对路径和预期 SHA-256。
-10. 任务文件缺失或哈希不一致属于主控分发失败，不计入候选失败、重试或人工干预。
+8. 在发送提示词前同时检查两个候选路径存在，并确认任务文件 SHA-256 完全相同；macOS 使用 `shasum -a 256 <file>`，Linux 使用 `sha256sum <file>`，不得使用裸 `shasum`。
+9. 共用提示词必须写明两个候选各自的任务文件绝对路径、统一相对路径、显式 SHA-256 校验命令和 64 位预期摘要。
+10. 任务文件缺失、哈希不一致或主控误用哈希算法属于主控分发失败，不计入候选失败、重试或人工干预。
 
 任务发布后不得只给某一候选 Agent 补充实现提示。若公共任务存在实质歧义，应暂停两边、统一修订任务，再按 `BENCHMARK.md` 处理。
 
