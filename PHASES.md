@@ -41,8 +41,10 @@ git worktree list
 ## 人工测试
 - 确认两个目录基线文件一致
 - 确认两个分支不同
-- 确认两个 API Key 不同
-- 确认模型都是 DeepSeek-V4-Flash
+- 确认 Codex 与 Claude 的 CC Switch 应用记录可以分开识别
+- 确认模型都是 `gpt-5.6-luna`
+- 确认 reasoning effort 都是 `medium`
+- 确认两边均通过 CC Switch 路由且候选统计相互隔离
 
 ---
 
@@ -103,6 +105,8 @@ pnpm build
 - 是否擅自加入 Redis/MQ/Next.js 等
 
 ---
+
+> Benchmark 实际执行时，Phase 02 与 Phase 03 合并为 `Phase 02-X — Persistence & Local Video Ingestion`，公共任务见 `benchmark/tasks/phase-02-x/task.md`。Phase 04 Worker 仍保持独立，不纳入本次合并。
 
 # Phase 02 — Persistence Foundation
 
@@ -891,10 +895,7 @@ alembic upgrade head
 - Error Recovery
 
 ## 最终统计
-- 总 Token
-- Input / Output / Cache
-- Actual Cost
-- Normalized Cost
+- Token / Input / Output / Cache / Estimated Cost 参考（可选，以 CC Switch 可用数据为准，不作为官方账单或评分依据）
 - Agent Runtime
 - Human Attention
 - Level 2/3/4 干预
