@@ -1,5 +1,7 @@
 # Phase 02 — Persistence Foundation
 
+> **SUPERSEDED**：本任务未分发给候选，已由 `benchmark/tasks/phase-02-x/task.md` 取代。保留本文件仅用于记录原始拆分方案。
+
 ## 1. 任务说明
 
 本任务用于在各候选自己的 Phase 01 结果上建立最小、可迁移、可测试的持久化基础设施。
@@ -9,7 +11,7 @@ Codex 与 Claude 必须接收并执行完全相同的本文件。开始前必须
 - `CODEX.md`
 - `PHASES.md`
 - `BENCHMARK.md`
-- `benchmark/tasks/phase-02.md`
+- `benchmark/archive/phase-02/task.md`
 - 自己对应的入口文件（`AGENTS.md` 或 `CLAUDE.md`）
 
 各候选必须延续自己的 Phase 01 实现，不得复制另一候选的目录结构或代码。

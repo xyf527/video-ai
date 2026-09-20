@@ -106,6 +106,8 @@ pnpm build
 
 ---
 
+> Benchmark 实际执行时，Phase 02 与 Phase 03 合并为 `Phase 02-X — Persistence & Local Video Ingestion`，公共任务见 `benchmark/tasks/phase-02-x/task.md`。Phase 04 Worker 仍保持独立，不纳入本次合并。
+
 # Phase 02 — Persistence Foundation
 
 ## 目标

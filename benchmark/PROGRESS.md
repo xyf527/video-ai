@@ -4,7 +4,7 @@
 
 ## 当前总览
 
-- Current Phase: Phase 02 — Persistence Foundation（PREPARED / NOT DISTRIBUTED）
+- Current Phase: Phase 02-X — Persistence & Local Video Ingestion（READY TO START）
 - Controller Harness: ChatGPT Work（Codex desktop task）
 - Controller Model: `gpt-5.6-sol`
 - Controller Reasoning Effort: `medium`
@@ -12,7 +12,7 @@
 - Candidate Model: Codex 与 Claude 均为 `gpt-5.6-luna`
 - Candidate Reasoning Effort: Codex 与 Claude 均为 `medium`
 - Usage / Cost: CC Switch 数据仅供参考，不作为官方账单或评分依据
-- Next Gate: 用户体验两个实现并确认是否分发 Phase 02
+- Next Gate: 用户向两个候选发送 `benchmark/prompts/phase-02-x/common.md` 中完全相同的提示词
 - Last Verified At: 2026-09-20 (Asia/Shanghai)
 
 ## Phase 01
@@ -29,7 +29,7 @@
 - Judge Result: PASSED（94/100，DX 为待用户体验的暂定分）
 - Fix Round: 0/3
 - Human Intervention: Level 0
-- Report: `benchmark/reports/phase-01-codex.md`
+- Report: `benchmark/reports/phase-01/codex.md`
 
 ### Claude
 
@@ -43,7 +43,7 @@
 - Judge Result: PASSED（94/100，DX 为待用户体验的暂定分）
 - Fix Round: 0/3
 - Human Intervention: Level 0
-- Report: `benchmark/reports/phase-01-claude.md`
+- Report: `benchmark/reports/phase-01/claude.md`
 
 ## Phase 01 Exit Gate
 
@@ -64,7 +64,20 @@
 
 ## 下一步
 
-由用户分别体验 `http://127.0.0.1:5173/`（Codex）和 `http://127.0.0.1:5174/`（Claude），补充 Developer Experience 观察；随后将完全相同的 `benchmark/tasks/phase-02.md` 与 `benchmark/prompts/phase-02-common.md` 分发给两个候选。
+向两个候选发送 `benchmark/prompts/phase-02-x/common.md` 中完全相同的提示词。Phase 02-X 合并原 Phase 02、Phase 03 和最小前端联通，但明确不包含 Phase 04 Worker。
+
+## Phase 02-X 发布状态
+
+- Task: `benchmark/tasks/phase-02-x/task.md`
+- Common Prompt: `benchmark/prompts/phase-02-x/common.md`
+- Expected Task SHA-256: `657107db576e56e47ecf6a5c7a7269d7a4e773d7`
+- Codex absolute path: `/Users/xyf/PycharmProjects/video-ai-codex/benchmark/tasks/phase-02-x/task.md`
+- Claude absolute path: `/Users/xyf/PycharmProjects/video-ai-claude/benchmark/tasks/phase-02-x/task.md`
+- Codex phase start commit: `ba2282c`
+- Claude phase start commit: `b5eeb1f`
+- Codex task hash: VERIFIED
+- Claude task hash: VERIFIED
+- Distribution incident: Claude 第一次启动时任务文件缺失；属于 Controller 分发失误，不计候选失败、重试或人工干预。
 
 ## 阶段历史
 

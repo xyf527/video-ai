@@ -87,7 +87,7 @@ git tag benchmark-v0
 每个 Phase 使用完全相同的任务文件：
 
 ```text
-benchmark/tasks/phase-XX.md
+benchmark/tasks/phase-XX/task.md
 ```
 
 禁止针对某一个 Agent 临时增加额外说明。
@@ -200,8 +200,8 @@ Hidden Tests 验证：
 候选 Agent 禁止修改：
 
 ```text
-benchmark/tests/hidden/
-benchmark/judge/
+benchmark/tests/hidden/phase-XX/
+benchmark/judge/phase-XX/
 ```
 
 若修改则记录 `Integrity Violation` 并扣分。

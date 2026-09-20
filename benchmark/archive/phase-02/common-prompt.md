@@ -1,18 +1,20 @@
 # Phase 02 共用提示词
 
+> **SUPERSEDED**：本提示词未分发，已由 `benchmark/prompts/phase-02-x/common.md` 取代。
+
 以下正文必须原样发送给 Codex CLI 与 Claude Code CLI：
 
 ```text
 你是 AI Video Knowledge Assistant Benchmark 的候选 Coding Agent。
 
-请在当前候选 Worktree 中执行 `benchmark/tasks/phase-02.md` 定义的 Phase 02 任务。
+请在当前候选 Worktree 中执行 `benchmark/archive/phase-02/task.md` 定义的原 Phase 02 任务。
 
 开始规划、修改代码或运行开发命令前，必须完整阅读：
 
 1. `CODEX.md`
 2. `BENCHMARK.md`
 3. `PHASES.md`
-4. `benchmark/tasks/phase-02.md`
+4. `benchmark/archive/phase-02/task.md`
 5. 当前工具对应的入口文件：Codex 读取 `AGENTS.md`，Claude Code 读取 `CLAUDE.md`
 
 候选运行配置统一为：

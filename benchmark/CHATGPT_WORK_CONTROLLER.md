@@ -68,7 +68,7 @@ Router: CC Switch
 3. `BENCHMARK.md`
 4. `PHASES.md`
 5. `benchmark/PROGRESS.md`
-6. 当前 `benchmark/tasks/phase-XX.md`
+6. 当前 `benchmark/tasks/phase-XX/task.md`
 
 然后执行只读检查：
 
@@ -113,8 +113,11 @@ git -C /Users/xyf/PycharmProjects/video-ai-claude status --short --branch
 3. 结合两边已经存在的公共 API 和目录结构编写任务，但不得偏向某一边的实现。
 4. 明确允许范围、禁止范围、API Contract、公开测试、人工测试和完成汇报格式。
 5. 检查任务是否满足 `CODEX.md` 的 30–90 分钟独立任务粒度；过大时拆分。
-6. 将唯一公共任务保存为 `benchmark/tasks/phase-XX.md` 并提交到 `main`。
-7. 确认两个候选 worktree 合入的是完全相同的任务提交。
+6. 将唯一公共任务保存为 `benchmark/tasks/phase-XX/task.md`，共用提示词保存为 `benchmark/prompts/phase-XX/common.md`。
+7. 把任务文件实际同步到两个候选 Worktree；不得只存在于主控 Worktree。
+8. 在发送提示词前同时检查两个候选路径存在，并确认任务文件 SHA-256 完全相同。
+9. 共用提示词必须写明两个候选各自的任务文件绝对路径、统一相对路径和预期 SHA-256。
+10. 任务文件缺失或哈希不一致属于主控分发失败，不计入候选失败、重试或人工干预。
 
 任务发布后不得只给某一候选 Agent 补充实现提示。若公共任务存在实质歧义，应暂停两边、统一修订任务，再按 `BENCHMARK.md` 处理。
 
@@ -147,14 +150,14 @@ git -C /Users/xyf/PycharmProjects/video-ai-claude status --short --branch
 每个候选生成独立报告：
 
 ```text
-benchmark/reports/phase-XX-codex.md
-benchmark/reports/phase-XX-claude.md
+benchmark/reports/phase-XX/codex.md
+benchmark/reports/phase-XX/claude.md
 ```
 
 两边都结束后生成：
 
 ```text
-benchmark/reports/phase-XX-comparison.md
+benchmark/reports/phase-XX/comparison.md
 ```
 
 报告必须区分：
