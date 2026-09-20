@@ -12,9 +12,10 @@
 - Codex：`/Users/xyf/PycharmProjects/video-ai-codex/benchmark/tasks/phase-02-x/task.md`
 - Claude：`/Users/xyf/PycharmProjects/video-ai-claude/benchmark/tasks/phase-02-x/task.md`
 - 统一相对路径：`benchmark/tasks/phase-02-x/task.md`
-- 预期 SHA-256：`657107db576e56e47ecf6a5c7a7269d7a4e773d7`
+- SHA-256 校验命令（macOS）：`shasum -a 256 benchmark/tasks/phase-02-x/task.md`
+- 预期 SHA-256：`3bc5c804eb46f776c271399b828bc9392d3492e9fff44c297ea2251e8de58d83`
 
-开始前必须确认当前 Worktree 中该文件存在且 SHA-256 与预期一致。不一致时立即停止并报告，不得根据旧 Phase 文档猜测实现。
+开始前必须使用上面的显式 SHA-256 命令确认当前 Worktree 中该文件存在且摘要与预期一致。不得使用未指定算法的裸 `shasum`（它在 macOS 默认计算 SHA-1）。不一致时立即停止并报告，不得根据旧 Phase 文档猜测实现。
 
 本次任务合并 Persistence Foundation、Local Video Upload、LocalStorage 和最小前端联通，但明确不包含 Worker、FFmpeg 或任何 AI 能力。
 
