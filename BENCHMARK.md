@@ -6,8 +6,8 @@
 
 本 Benchmark 用于比较两套真实 Coding Agent 工作流：
 
-- Codex CLI + DeepSeek-V4-Flash
-- Claude Code CLI + DeepSeek-V4-Flash
+- Codex CLI + GPT-5.6 Luna（medium）
+- Claude Code CLI + GPT-5.6 Luna（medium）
 
 主要比较 Coding Agent Harness 的工程执行能力，而不是比较底层模型能力。
 
@@ -20,7 +20,7 @@
 - 相同测试
 - 相同人工干预规则
 
-GPT-5.6 Sol / Pro 只作为需求文档编写者、测试设计者、Judge、Code Review 辅助与结果分析者，不得直接替任一候选 Agent 修改候选实现代码。
+ChatGPT Work 主控同样使用 GPT-5.6 Sol（medium），只作为需求文档编写者、测试设计者、Judge、Code Review 辅助与结果分析者，不得直接替任一候选 Agent 修改候选实现代码。主控会话的运行记录不得计入任何候选结果。
 
 ## 2. 候选配置
 
@@ -28,22 +28,28 @@ GPT-5.6 Sol / Pro 只作为需求文档编写者、测试设计者、Judge、Cod
 
 ```text
 Harness: Codex CLI
-Model: DeepSeek-V4-Flash
-Provider: SiliconFlow
-API Key: 独立 Codex Key
+Model: gpt-5.6-luna
+Reasoning Effort: medium
+Router: CC Switch
+CC Switch Profile: 独立 Codex 配置
 Worktree: video-ai-codex
 Branch: agent/codex
+Backend Port: 8001
+Frontend Port: 5173
 ```
 
 ### Candidate B — Claude
 
 ```text
 Harness: Claude Code CLI
-Model: DeepSeek-V4-Flash
-Provider: SiliconFlow
-API Key: 独立 Claude Key
+Model: gpt-5.6-luna
+Reasoning Effort: medium
+Router: CC Switch
+CC Switch Profile: 独立 Claude 配置
 Worktree: video-ai-claude
 Branch: agent/claude
+Backend Port: 8000
+Frontend Port: 5174
 ```
 
 正式 Benchmark 中两边不得使用不同模型。
@@ -200,7 +206,7 @@ benchmark/judge/
 
 若修改则记录 `Integrity Violation` 并扣分。
 
-## 9. Token 与费用统计
+## 9. Token 与费用参考
 
 主要使用 CC Switch Usage Statistics。
 
@@ -211,7 +217,7 @@ App = Codex
 App = Claude
 ```
 
-记录：
+如 CC Switch 能稳定提供，则记录：
 - Requests
 - Input Tokens
 - Output Tokens
@@ -221,53 +227,34 @@ App = Claude
 - Estimated Cost
 - Average Latency
 
-CC Switch 中为 DeepSeek-V4-Flash 配置相同的自定义价格。
+这些数据仅供参考，不作为精确账单，也不进入评分。原因包括：不同 Harness 的缓存口径、上下文统计方式和 CC Switch 估算方式可能不同，Estimated Cost 也不等同于官方账单。缺失某项统计时记录 `NOT AVAILABLE`，不得自行推算或补造数据。
 
-## 10. API Key 隔离
+## 10. CC Switch 配置隔离
 
-SiliconFlow 创建两个 Key：
-
-```text
-SILICONFLOW_CODEX_API_KEY
-SILICONFLOW_CLAUDE_API_KEY
-```
-
-CC Switch Provider 可分别命名：
+Codex 与 Claude 使用独立的 CC Switch 配置或应用路由，例如：
 
 ```text
-SiliconFlow-Codex
-SiliconFlow-Claude
+GPT-5.6-Luna-Codex
+GPT-5.6-Luna-Claude
 ```
 
 用途：
-- 防止凭证混用
-- 核对实际调用
-- 单独撤销
-- 排查异常消费
+- 核对两个 Harness 是否实际路由到 `gpt-5.6-luna`
+- 确认两边 reasoning effort 均为 `medium`
+- 分开查看 CC Switch 的请求和用量参考
+- 避免候选统计混在同一应用记录中
 
-## 11. Actual Cost 与 Normalized Cost
+## 11. 统计解释边界
 
-### Actual Cost
-Provider 实际扣费。
+- 不计算或比较 `Actual Cost` 与 `Normalized Cost`。
+- 不把 CC Switch Estimated Cost 描述为官方账单。
+- 不因 Token、缓存或费用字段缺失而扣分。
+- 效率比较优先使用 Wall Clock Time、重试次数、人工干预和任务完成质量。
+- 若未来获得可核验的官方账单，可作为独立附录补充，不追溯改变既有评分。
 
-### Normalized Cost
-为排除高峰/低峰价格、临时优惠、运行时段差异，按统一费率重新计算：
+## 12. ChatGPT Work 主控运行不计入 Candidate
 
-```text
-Normalized Cost
-=
-Input Tokens × Standard Input Price
-+
-Output Tokens × Standard Output Price
-+
-Cache Tokens × Standard Cache Price
-```
-
-最终比较以 Normalized Cost 为主，Actual Cost 作为真实钱包成本展示。
-
-## 12. GPT-5.6 Judge 成本不计入 Candidate
-
-GPT-5.6 Sol / Pro 的文档、测试、Judge、Review、结果分析成本不计入 Codex 或 Claude Candidate。
+ChatGPT Work 主控执行的文档、测试、Judge、Review 和结果分析，不计入 Codex 或 Claude Candidate 的用量与运行时间。
 
 ## 13. 时间记录
 
@@ -311,7 +298,7 @@ feat(phase-02): persistence foundation
 - Code Quality：10
 - Scope Discipline：5
 - Debug & Self-Recovery：10
-- Token / Cost Efficiency：5
+- Execution Efficiency：5
 - Developer Experience：10
 
 建议权重来源：
@@ -335,7 +322,13 @@ Before:
 After:
 
 ## Model
-DeepSeek-V4-Flash
+gpt-5.6-luna
+
+## Reasoning Effort
+medium
+
+## Router
+CC Switch
 
 ## Agent Runtime
 00:00:00
@@ -343,16 +336,14 @@ DeepSeek-V4-Flash
 ## Human Attention
 00:00:00
 
-## Token Usage
+## Usage Reference（可选、非权威）
 - Input:
 - Output:
 - Cache Read:
 - Cache Creation:
 - Total:
-
-## Cost
-- Actual:
-- Normalized:
+- Estimated Cost:
+- Source: CC Switch / NOT AVAILABLE
 
 ## Agent Self Test
 - Commands:
@@ -386,7 +377,7 @@ None / ...
 - Code Quality:
 - Scope:
 - Debug:
-- Cost:
+- Execution Efficiency:
 - DX:
 
 ## Notes
@@ -405,12 +396,12 @@ None / ...
 
 允许得出：
 
-> 在本项目、相同 DeepSeek-V4-Flash、相同任务、相同环境下，Codex CLI 与 Claude Code CLI 两套工作流的表现差异。
+> 在本项目、相同 GPT-5.6 Luna（medium）、相同 CC Switch 路由条件、相同任务和相同环境下，Codex CLI 与 Claude Code CLI 两套工作流的表现差异。
 
 不允许直接推广成：
 - Codex 永远优于 Claude Code
 - Claude Code 永远优于 Codex
-- DeepSeek 模型本身优于/弱于其他模型
+- GPT-5.6 Luna 模型本身优于/弱于其他模型
 
 ## 20. 最终输出
 
@@ -422,8 +413,7 @@ benchmark/results/final-comparison.md
 
 至少包含：
 - Phase-by-Phase 得分
-- 总 Token
-- 总费用
+- Token / Cache / Estimated Cost 参考（仅在 CC Switch 可稳定提供时展示）
 - 总运行时间
 - 总人工时间
 - 干预次数

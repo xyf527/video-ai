@@ -235,7 +235,7 @@ npm run dev
 - 建议 Commit Message: `feat(phase-01): bootstrap project`
 ```
 
-只汇报真实完成和真实执行的内容。不得把“代码看起来应该能运行”写成“测试已通过”，也不得代替 Benchmark Judge 填写 Token、费用、最终评分或 Judge Hidden Tests 结果。
+只汇报真实完成和真实执行的内容。不得把“代码看起来应该能运行”写成“测试已通过”，也不得代替 Benchmark Judge 填写 CC Switch 用量参考、最终评分或 Judge Hidden Tests 结果。
 
 ## 10. Benchmark 观察重点
 
