@@ -1,0 +1,9 @@
+- main [ref=e3]:
+  - paragraph [ref=e4]: AI VIDEO KNOWLEDGE ASSISTANT
+  - heading "把视频变成可以追溯的知识。" [level=1] [ref=e5]
+  - paragraph [ref=e6]: Phase 01 已建立最小前后端骨架。后续阶段将在这里逐步接入视频理解能力。
+  - generic [ref=e7]:
+    - text: 后端连接状态
+    - paragraph [ref=e8]: ● 已连接 · AI Video Knowledge Assistant
+  - link "查看项目说明 →" [ref=e9] [cursor=pointer]:
+    - /url: /about
